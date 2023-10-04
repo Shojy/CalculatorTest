@@ -1,11 +1,12 @@
 using CalculatorTest.Api.Models;
 using CalculatorTest.Lib;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorTest.Api.Controllers;
 
 [ApiController]
-
+[AllowAnonymous]
 [Route("api/[controller]")]
 public class CalculatorController : ControllerBase
 {
