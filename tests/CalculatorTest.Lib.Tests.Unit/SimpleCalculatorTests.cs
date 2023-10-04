@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace CalculatorTest.Lib.Tests.Unit;
 
 public class SimpleCalculatorTests

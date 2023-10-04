@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-
 namespace CalculatorTest.Api.Tests.Integration;
 
 public class ApiFactory : WebApplicationFactory<ICalculatorTestApiAssemblyMarker>, IAsyncLifetime
@@ -14,7 +12,7 @@ public class ApiFactory : WebApplicationFactory<ICalculatorTestApiAssemblyMarker
         return Task.CompletedTask;
     }
 
-    public Task DisposeAsync()
+    public new Task DisposeAsync()
     {
         return Task.CompletedTask;
     }

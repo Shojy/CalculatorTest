@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-
-namespace CalculatorTest.Api.Tests.Integration.Controllers;
-
+﻿namespace CalculatorTest.Api.Tests.Integration.Controllers;
 
 // Using a copy of the expected model ensures the contract is not silently violated by refactoring in the api project
 public readonly record struct CalculatorResultDto(int Result);

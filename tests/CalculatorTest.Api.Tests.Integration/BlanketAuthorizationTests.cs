@@ -1,5 +1,4 @@
 using System.Reflection;
-using FluentAssertions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +6,10 @@ using Xunit.Abstractions;
 
 namespace CalculatorTest.Api.Tests.Integration;
 
+/// <summary>
+/// Contains a reflection-based test to ensure all endpoints or controllers are given an Authorize or AllowAnonymous attribute.
+/// This test protects against accidental exposure by ensuring public endpoints are explicitly declared as such.
+/// </summary>
 public class BlanketAuthorizationTests
 {
     private readonly ITestOutputHelper _output;
