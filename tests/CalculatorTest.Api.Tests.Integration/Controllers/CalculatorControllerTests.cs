@@ -35,4 +35,44 @@ public class CalculatorControllerTests : IAsyncLifetime
         response.EnsureSuccessStatusCode();
         response.Content.Headers.ContentType!.ToString().Should().Be("application/json; charset=utf-8");
     }
+
+    [Theory]
+    [InlineData(10, 20, 30)]
+    [InlineData(45, 10, 55)]
+    public async Task Add_GivenSimpleValues_ProducesCorrectResult(int start, int amount, int expected)
+    {
+        var response = await _client.GetFromJsonAsync<CalculatorResultDto>($"api/Calculator/Add?start={start}&amount={amount}");
+
+        response.Result.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(10, -20, -10)]
+    [InlineData(-45, 10, -35)]
+    public async Task Add_GivenNegativeValues_ProducesCorrectResult(int start, int amount, int expected)
+    {
+        var response = await _client.GetFromJsonAsync<CalculatorResultDto>($"api/Calculator/Add?start={start}&amount={amount}");
+
+        response.Result.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(10, 20, -10)]
+    [InlineData(45, 10, 35)]
+    public async Task Subtract_GivenSimpleValues_ProducesCorrectResult(int start, int amount, int expected)
+    {
+        var response = await _client.GetFromJsonAsync<CalculatorResultDto>($"api/Calculator/Subtract?start={start}&amount={amount}");
+
+        response.Result.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(10, -20, 30)]
+    [InlineData(-45, 10, -55)]
+    public async Task Subtract_GivenNegativeValues_ProducesCorrectResult(int start, int amount, int expected)
+    {
+        var response = await _client.GetFromJsonAsync<CalculatorResultDto>($"api/Calculator/Subtract?start={start}&amount={amount}");
+
+        response.Result.Should().Be(expected);
+    }
 }
