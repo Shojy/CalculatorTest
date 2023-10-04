@@ -25,26 +25,26 @@ public class BlanketAuthorizationTests
     [Fact]
     public void AllActionsOrParentControllerHaveAuthorizationAttributeTest()
     {
-        List<Type> allControllers = GetAllControllerTypes();
+        var allControllers = GetAllControllerTypes();
 
         _output.WriteLine($"Found {allControllers.Count} controllers/pages");
 
-        List<Type> unauthorizedControllers =
+        var unauthorizedControllers =
             GetControllerTypesThatAreMissing<AuthorizeAttribute>(allControllers);
 
         unauthorizedControllers =
             GetControllerTypesThatAreMissing<AllowAnonymousAttribute>(unauthorizedControllers);
 
-        int notAuthorizedEndpoints = 0;
+        var notAuthorizedEndpoints = 0;
 
-        foreach (Type controller in unauthorizedControllers)
+        foreach (var controller in unauthorizedControllers)
         {
-            List<MethodInfo> actions =
+            var actions =
                 controller.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                     .Where(m => m.MemberType == MemberTypes.Method && !m.IsSpecialName)
                     .ToList();
 
-            List<MethodInfo>? unauthorizedActions =
+            var unauthorizedActions =
                 actions.Where(
                         action =>
                             action.GetCustomAttribute<AuthorizeAttribute>() == null &&
@@ -102,7 +102,7 @@ public class BlanketAuthorizationTests
 
     private static void LoadAllAssemblies()
     {
-        List<Assembly> assemblies =
+        var assemblies =
             Directory.EnumerateFiles(
                     Path.GetDirectoryName(
                         Assembly.GetExecutingAssembly().Location) ?? string.Empty,
