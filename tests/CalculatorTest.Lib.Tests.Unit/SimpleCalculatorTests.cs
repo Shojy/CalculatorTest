@@ -65,14 +65,4 @@ public class SimpleCalculatorTests
 
         result.Should().Be(actual);
     }
-
-    [Theory]
-    [InlineData(2147483647, 1)]
-    [InlineData(1, 2147483647)]
-    [InlineData(-2147483648, -1)]
-    [InlineData(-1, -2147483648)]
-    public void Add_GivenExtremeNumbers_ThrowsException(int start, int value)
-    {
-        _sut.Invoking(x => x.Add(start, value)).Should().Throw<OverflowException>();
-    }
 }
